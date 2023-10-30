@@ -3,13 +3,36 @@
         <h1>
             <img src="../assets/logo.png" alt="Logo alura">
         </h1>
+        <button class="button" @click="alterarTema">
+            {{ textoBotao }}
+        </button>
     </header>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-    name: 'SideBar'
+    name: 'SideBar',
+    emits: ['aoTemaAlterado'],
+    data(){
+        return {
+            modoEscuro: false
+        }
+    },
+    computed: {
+        textoBotao() {
+            if(this.modoEscuro) {
+                return 'Desativar modo escuto'
+            }
+            return 'Ativar modo escuro'
+        }
+    },
+    methods: {
+        alterarTema() {
+            this.modoEscuro = !this.modoEscuro;
+            this.$emit("aoTemaAlterado", this.modoEscuro);
+        }
+    }
 })
 </script>
 <style scoped>
@@ -18,6 +41,7 @@ header {
     background: #0d3b66;
     width: 100%;
     height: 100vh;
+    text-align: center;
 }
 @media only screen and (max-width: 768px) {
     header {

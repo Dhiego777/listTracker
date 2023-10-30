@@ -1,9 +1,9 @@
 <template>
-  <main class="columns is-gapless is-multiline">
+  <main class="columns is-gapless is-multiline" :class="{ 'modo-escuro': modoEscuro }">
     <div class="column is-one-quarter">
-      <side-bar></side-bar>
+      <side-bar @aoTemaAlterado="trocarTema"></side-bar>
     </div>
-    <div class="column is-three-quarter">
+    <div class="column is-three-quarter conteudo">
       <form-component @aoSalvarTarefa="saveTask"></form-component>
       <div class="list">
         <task-box v-if="isEmptyList">
@@ -34,7 +34,8 @@ export default defineComponent({
   },
   data() {
     return {
-      tasks: [] as ITask[]
+      tasks: [] as ITask[],
+      modoEscuro: false
     }
   },
   computed: {
@@ -45,6 +46,9 @@ export default defineComponent({
   methods: {
     saveTask(task: ITask) {
       this.tasks.push(task)
+    },
+    trocarTema(modoEscuro: boolean) {
+      this.modoEscuro = modoEscuro;
     }
   }
 });
@@ -53,5 +57,19 @@ export default defineComponent({
 <style>
   .list{
     padding: 1.25rem;
+  }
+
+  main {
+    --bg-primario:#fff;
+    --texto-primario:#000;
+  }
+
+  main.modo-escuro {
+    --bg-primario:#2b2d42;
+    --texto-primario:#ddd;
+  }
+
+  .conteudo {
+    background-color: var(--bg-primario) ;
   }
 </style>

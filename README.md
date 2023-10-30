@@ -1,4 +1,7 @@
-# alura-tracker
+# Lista de tarefas
+# Uma lista onde você pode inserir o nome da tarefa
+# e com o passar do tempo quando apertar o botão stop
+# irá salvar na lista
 
 ## Project setup
 ```
